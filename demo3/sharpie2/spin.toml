@@ -1,0 +1,14 @@
+spin_version = "1"
+authors = ["Mikkel Mørk Hegnhøj <mikkel@fermyon.com>"]
+description = ""
+name = "sharpie2"
+version = "1.0.0"
+trigger = { type = "http", base = "/" }
+
+[[component]]
+id = "sharpie2"
+source = "bin/Release/net7.0/Sharpie2.wasm"
+[component.build]
+command = "dotnet build -c Release"
+[component.trigger]
+route = "/..."

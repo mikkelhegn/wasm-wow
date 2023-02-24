@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script type="module">
+    import init, {calc} from './pkg/calc.js';
+
+    async function run() {
+      await init();
+
+      const result = calc(1, 1);
+
+      const node = document.createElement("p");
+      node.innerText = `Result is ${result}`;
+      document.body.appendChild(node);
+    }
+
+    run();
+  </script>
+</body>
+
+</html>

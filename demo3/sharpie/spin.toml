@@ -1,0 +1,32 @@
+spin_version = "1"
+authors = ["Mikkel Mørk Hegnhøj <mikkel@fermyon.com>"]
+description = ""
+name = "sharpie"
+version = "1.0.0"
+trigger = { type = "http", base = "/" }
+
+[[component]]
+id = "sharpie"
+source = "bin/Release/net7.0/Sharpie.wasm"
+[component.build]
+command = "dotnet build -c Release"
+[component.trigger]
+route = "/sharpie/..."
+
+[[component]]
+id = "rusty"
+source = "rusty/target/wasm32-wasi/release/rusty.wasm"
+allowed_http_hosts = []
+files = [ { source = "rusty/files/", destination = "/" } ]
+[component.trigger]
+route = "/rusty/..."
+[component.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "rusty"
+
+[[component]]
+source = { url = "https://github.com/fermyon/spin-fileserver/releases/download/v0.0.1/spin_static_fs.wasm", digest = "sha256:650376c33a0756b1a52cad7ca670f1126391b79050df0321407da9c741d32375" }
+id = "files"
+files = [ { source = "assets", destination = "/" } ]
+[component.trigger]
+route = "/files/..."
